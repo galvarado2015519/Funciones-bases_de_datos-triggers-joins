@@ -1,0 +1,48 @@
+-- ///////////////////////////////////////////////////////////////////////////////////////////////////////// -- 5
+-- 12)	Empleados contratados entre los años X y Y
+/*DROP PROCEDURE sp_Inciso12;
+DELIMITER $$
+	CREATE PROCEDURE sp_Inciso12(IN añoX INT, IN añoY INT)
+		BEGIN
+			SELECT idEmpleado, nombre, edad, fechaDeNacimiento as 'fecha de nacimiento',fechaDeIngreso as 'fecha de contratación' 
+			FROM Empleados WHERE SUBSTRING(fechaDeIngreso, 1,4) BETWEEN añoX AND añoY ORDER BY fechaDeIngreso ASC;
+        END$$
+DELIMITER ;
+CALL sp_Inciso12(1990, 2000);
+
+	*/-- 13
+
+	SELECT fn_PagoAnualCategoria(idCategoria) FROM Categorias ORDER BY descripcion asc;
+	
+
+	/*-- inciso 16 -----------------------------------------------------------------------------------------------------------
+	
+	CREATE VIEW EmpleadosMayores35 as
+	SELECT * FROM Empleados WHERE edad > 35 and tipoDeCategoria = administrativo;
+	
+	-- 17 -----------------------------------------------------------------------------------------------------------------
+DELIMITER $$
+	CREATE PROCEDURE sp_Inciso17(IN departamento VARCHAR(45))
+    BEGIN
+		SELECT E.idEmpleado, E.nombre, D.descripcion AS departamento FROM Empleados E INNER JOIN
+		Asignaciones A ON E.idEmpleado = A.idEmpleado INNER JOIN 
+		Oficinas O ON O.idOficina = A.idOficina INNER JOIN 
+		Departamentos D ON D.idDepartamento = O.idDepartamento
+		WHERE D.descripcion != departamento ORDER BY E.idEmpleado ASC;
+	END$$
+DELIMITER ;
+CALL sp_Inciso17('Quiche');
+
+	
+	-- consulta 28 ---------------------------------------------------------------------------------------------------------
+
+SELECT count(edad) FROM empleados where edad >= 40;
+
+	-- consulta 23 -----------------------------------------------------------------------------------------------------------
+	
+	CREATE VIEW SueldoDeCadaEmpleadoYBonificacion as
+	SELECT sueldoBase,bonificacionGubernamental,bonificacionEmpresarial FROM Categorias;
+	
+	-- consulta 24 ---------------------------------------------------------------------------------------------------------
+	
+	SELECT Nombre FROM Empleados a inner join Empleados b WHERE 288016 AND 288017; 
